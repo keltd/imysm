@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i miss u</title>
+  <!-- Font Pixel -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pixel-size: 4px;
+      --soft-pink-1: #ffd6e7;
+      --soft-pink-2: #ffc2dd;
+      --soft-pink-3: #ffa8ce;
+      --soft-pink-4: #ff8fc0;
+      --soft-pink-5: #ff76b2;
+      --soft-pink-6: #ff5da4;
+      --soft-purple: #d9a5e8;
+      --soft-yellow: #fff0ac;
+      --soft-blue: #a6e3ff;
+      --soft-green: #c9ffb8;
+      --text-color: #6b3a5c;
+      --border-color: #ffa8ce;
+      --photo-border: #ffc2dd;
+      --heart-color: #ff5d8f;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Silkscreen', sans-serif;
+      background: linear-gradient(135deg, var(--soft-pink-1) 0%, var(--soft-purple) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: var(--text-color);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Header */
+    .header {
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+      animation: fadeInDown 1s ease-out;
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 24px;
+      color: var(--text-color);
+      text-shadow: 3px 3px 0 var(--soft-pink-3);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: var(--pixel-size) solid var(--border-color);
+      box-shadow: 6px 6px 0px var(--soft-pink-4);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.9;
+      max-width: 600px;
+      line-height: 1.6;
+      background-color: rgba(255, 255, 255, 0.4);
+      padding: 10px 15px;
+      border: 2px solid var(--soft-pink-3);
+      animation: fadeIn 2s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.9; }
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+      justify-content: center;
+      align-items: center;
+      max-width: 1000px;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .photo-box {
+      width: 100%;
+      height: 0;
+      padding-bottom: 133%; /* Rasio 3:4 (4/3 = 1.333) */
+      background-color: var(--soft-pink-1);
+      border: var(--pixel-size) solid var(--border-color);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 
+        6px 6px 0px var(--soft-pink-4),
+        12px 12px 0px var(--soft-purple);
+      overflow: hidden;
+      animation: photoBoxAppear 0.8s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    @keyframes photoBoxAppear {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .photo-box:nth-child(1) { animation-delay: 0.1s; }
+    .photo-box:nth-child(2) { animation-delay: 0.2s; }
+    .photo-box:nth-child(3) { animation-delay: 0.3s; }
+    .photo-box:nth-child(4) { animation-delay: 0.4s; }
+
+    .photo-box:hover {
+      transform: translate(-4px, -4px) rotate(-1deg);
+      box-shadow: 
+        10px 10px 0px var(--soft-pink-4),
+        16px 16px 0px var(--soft-purple),
+        0 0 15px rgba(255, 168, 206, 0.6);
+    }
+
+    .photo-box img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      image-rendering: pixelated;
+      border: 4px solid var(--photo-border);
+      filter: contrast(1.05) brightness(1.05);
+      transition: transform 0.5s ease, filter 0.3s;
+    }
+
+    .photo-box:hover img {
+      transform: scale(1.08);
+      filter: contrast(1.1) brightness(1.1) saturate(1.2);
+    }
+
+    .text-box {
+      grid-column: 1 / -1;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: var(--pixel-size) solid var(--border-color);
+      border-radius: 4px;
+      padding: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      position: relative;
+      box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      color: var(--text-color);
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+      min-height: 120px;
+      animation: textBoxGlow 4s infinite alternate;
+    }
+    
+    @keyframes textBoxGlow {
+      from { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.05), 0 0 5px rgba(255, 168, 206, 0.5); }
+      to { box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.05), 0 0 15px rgba(255, 168, 206, 0.8); }
+    }
+
+    /* Pixel decoration elements */
+    .pixel {
+      width: var(--pixel-size);
+      height: var(--pixel-size);
+      position: absolute;
+      background-color: var(--soft-yellow);
+      border-radius: 1px;
+      z-index: 1;
+      animation: pixelBlink 4s infinite;
+    }
+    
+    .pixel-1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .pixel-2 { top: 20%; right: 10%; animation-delay: 0.5s; }
+    .pixel-3 { bottom: 15%; left: 8%; animation-delay: 1s; }
+    .pixel-4 { bottom: 25%; right: 7%; animation-delay: 1.5s; }
+    .pixel-5 { top: 40%; left: 12%; animation-delay: 2s; }
+    .pixel-6 { top: 60%; right: 15%; animation-delay: 2.5s; }
+    .pixel-7 { top: 15%; left: 20%; background-color: var(--soft-blue); animation-delay: 3s; }
+    .pixel-8 { bottom: 30%; right: 20%; background-color: var(--soft-green); animation-delay: 3.5s; }
+    .pixel-9 { top: 70%; left: 25%; background-color: var(--soft-pink-5); animation-delay: 4s; }
+    .pixel-10 { bottom: 10%; right: 25%; background-color: var(--soft-purple); animation-delay: 4.5s; }
+    .pixel-11 { top: 30%; left: 85%; background-color: var(--soft-pink-6); animation-delay: 5s; }
+    .pixel-12 { bottom: 40%; left: 90%; background-color: var(--soft-yellow); animation-delay: 5.5s; }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      font-size: 20px;
+      color: var(--heart-color);
+      opacity: 0.7;
+      animation: float 6s ease-in-out infinite, heartBeat 1.5s infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    
+    .heart-1 { top: 10%; left: 8%; animation-delay: 0s, 0s; }
+    .heart-2 { top: 25%; right: 12%; animation-delay: 1s, 0.3s; }
+    .heart-3 { bottom: 15%; left: 10%; animation-delay: 2s, 0.6s; }
+    .heart-4 { bottom: 30%; right: 8%; animation-delay: 3s, 0.9s; }
+    .heart-5 { top: 65%; left: 15%; animation-delay: 4s, 1.2s; }
+    .heart-6 { top: 45%; right: 5%; animation-delay: 2.5s, 1.5s; }
+    .heart-7 { bottom: 5%; left: 20%; animation-delay: 1.5s, 1.8s; }
+
+    /* Popup Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 214, 231, 0.95);
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+      flex-direction: column;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 70%;
+      border: var(--pixel-size) solid var(--photo-border);
+      image-rendering: pixelated;
+      position: relative;
+      box-shadow: 0 0 0 8px var(--soft-pink-3), 0 0 20px rgba(0, 0, 0, 0.2);
+      background-color: white;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    @keyframes popIn {
+      0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .modal img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s;
+    }
+    
+    .modal img:hover {
+      transform: scale(1.02);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--text-color);
+      font-size: 36px;
+      cursor: pointer;
+      text-shadow: 2px 2px 0 var(--soft-pink-1);
+      transition: transform 0.3s, color 0.3s;
+      z-index: 21;
+      animation: closeBtnSpin 5s infinite;
+    }
+    
+    @keyframes closeBtnSpin {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+
+    .close-btn:hover {
+      transform: scale(1.2) rotate(90deg);
+      color: var(--soft-pink-6);
+    }
+
+    /* Love Button */
+    .love-button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(to bottom, var(--soft-pink-3), var(--soft-pink-5));
+      border: var(--pixel-size) solid var(--border-color);
+      border-radius: 4px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 14px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0px 4px 0px var(--soft-pink-6);
+      transition: all 0.2s;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      animation: loveButtonPulse 2s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    @keyframes loveButtonPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .love-button::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+      transform: rotate(45deg);
+      animation: loveButtonShine 3s infinite;
+    }
+    
+    @keyframes loveButtonShine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+    
+    .love-button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0px 6px 0px var(--soft-pink-6), 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .love-button:active {
+      transform: translateY(2px) scale(0.98);
+      box-shadow: 0px 2px 0px var(--soft-pink-6);
+    }
+
+    /* Floating Emojis */
+    .emoji {
+      position: fixed;
+      font-size: 24px;
+      pointer-events: none;
+      z-index: 100;
+      animation: emojiFloat 4s forwards;
+    }
+    
+    @keyframes emojiFloat {
+      0% { 
+        transform: translateY(0) translateX(0) rotate(0deg); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: translateY(-100vh) translateX(var(--x-end, 0)) rotate(360deg); 
+        opacity: 0; 
+      }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-color);
+      padding: 10px;
+      opacity: 0.8;
+      position: relative;
+      z-index: 2;
+      animation: footerBounce 8s infinite;
+    }
+    
+    @keyframes footerBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .instructions {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 2px solid var(--soft-pink-3);
+      max-width: 800px;
+      text-align: center;
+    }
+    
+    /* Cursor custom */
+    body {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="4" height="4" fill="%23ff5da4"/><rect x="4" y="4" width="4" height="4" fill="%23ff5da4"/><rect x="8" y="8" width="4" height="4" fill="%23ff5da4"/></svg>'), auto;
+    }
+    
+    /* Photo frame decorations */
+    .photo-box::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      z-index: 1;
+      pointer-events: none;
+      animation: frameGlow 3s infinite alternate;
+    }
+    
+    @keyframes frameGlow {
+      from { border-color: rgba(255, 255, 255, 0.4); }
+      to { border-color: rgba(255, 255, 255, 0.8); }
+    }
+    
+    .photo-box::after {
+      content: "❤";
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      color: var(--heart-color);
+      font-size: 16px;
+      z-index: 2;
+      text-shadow: 1px 1px 0 white;
+      animation: heartThrob 1.5s infinite;
+    }
+    
+    @keyframes heartThrob {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    
+    /* Background animation */
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    body {
+      background-size: 200% 200%;
+      animation: backgroundShift 15s ease infinite;
+    }
+    
+    /* Cursor trail effect */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: var(--soft-pink-5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.7;
+      animation: trailFade 0.6s forwards;
+    }
+    
+    @keyframes trailFade {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+    
+    /* Sparkle effect */
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: var(--soft-yellow);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: sparkle 1s forwards;
+    }
+    
+    @keyframes sparkle {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { transform: scale(1) rotate(180deg); opacity: 1; }
+      100% { transform: scale(0) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Confetti effect */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: var(--soft-pink-3);
+      pointer-events: none;
+      z-index: 1000;
+      animation: confettiFall 5s forwards;
+    }
+    
+    @keyframes confettiFall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .title {
+        font-size: 18px;
+      }
+      
+      .modal-content {
+        max-height: 60%;
+      }
+      
+      .love-button {
+        padding: 10px 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+      
+      .photo-box {
+        padding-bottom: 133%; /* Tetap mempertahankan rasio 3:4 */
+      }
+      
+      .text-box {
+        font-size: 12px;
+        padding: 15px;
+      }
+      
+      .title {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+      
+      .modal-content {
+        max-height: 50%;
+      }
+      
+      .love-button {
+        padding: 8px 16px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <div class="heart heart-1">❤</div>
+  <div class="heart heart-2">❤</div>
+  <div class="heart heart-3">❤</div>
+  <div class="heart heart-4">❤</div>
+  <div class="heart heart-5">❤</div>
+  <div class="heart heart-6">❤</div>
+  <div class="heart heart-7">❤</div>
+  
+  <!-- Pixel decorations -->
+  <div class="pixel pixel-1"></div>
+  <div class="pixel pixel-2"></div>
+  <div class="pixel pixel-3"></div>
+  <div class="pixel pixel-4"></div>
+  <div class="pixel pixel-5"></div>
+  <div class="pixel pixel-6"></div>
+  <div class="pixel pixel-7"></div>
+  <div class="pixel pixel-8"></div>
+  <div class="pixel pixel-9"></div>
+  <div class="pixel pixel-10"></div>
+  <div class="pixel pixel-11"></div>
+  <div class="pixel pixel-12"></div>
+
+  <div class="container">
+    <!-- Foto dengan rasio 3:4 -->
+    <!-- Ganti "foto1.jpg" dengan nama file foto Anda -->
+    <div class="photo-box">
+      <img src="foto1.jpg" alt="foto1">
+    </div>
+    
+    <!-- Ganti "foto2.jpg" dengan nama file foto Anda -->
+    <div class="photo-box">
+      <img src="foto2.jpg" alt="foto2">
+    </div>
+    
+    <!-- Ganti "foto3.jpg" dengan nama file foto Anda -->
+    <div class="photo-box">
+      <img src="foto3.jpg" alt="foto3">
+    </div>
+    
+    <!-- Ganti "foto4.jpg" dengan nama file foto Anda -->
+    <div class="photo-box">
+      <img src="foto4.jpg" alt="foto4">
+    </div>
+
+    <!-- Kolom Teks -->
+    <div class="text-box" id="textBox"></div>
+  </div>
+
+  <!-- Modal Foto -->
+  <div class="modal" id="modal">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="popup">
+    </div>
+    <button class="love-button" id="loveButton"> ❤ </button>
+  </div>
+
+  <div class="footer">
+    <p>made with love ❤</p>
+  </div>
+
+  <script>
+    // Popup Foto
+    const photoBoxes = document.querySelectorAll('.photo-box');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.getElementById('closeBtn');
+    const loveButton = document.getElementById('loveButton');
+
+    photoBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = box.querySelector('img').src;
+        
+        // Tambahkan efek confetti saat membuka modal
+        createConfetti();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Tutup modal saat klik di luar gambar
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Animasi Typewriter di kolom teks
+    const textBox = document.getElementById('textBox');
+    const message = "sayangg, aku bingung harus kasi kamu apa kalo lagi sakit perutt, jangan nangis nangis yaa, yang kuattt. i lovee uu so much";
+    let index = 0;
+
+    function typeWriter() {
+      if (index < message.length) {
+        // Tambahkan efek pada setiap karakter
+        const char = message.charAt(index);
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.style.opacity = '0';
+        span.style.animation = `charAppear 0.5s ${index * 0.08}s forwards`;
+        textBox.appendChild(span);
+        
+        index++;
+        setTimeout(typeWriter, 80);
+      }
+    }
+    
+    // Tambahkan style untuk animasi karakter
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes charAppear {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Cursor trail effect
+    document.addEventListener('mousemove', function(e) {
+      const trail = document.createElement('div');
+      trail.classList.add('cursor-trail');
+      trail.style.left = e.pageX - 4 + 'px';
+      trail.style.top = e.pageY - 4 + 'px';
+      trail.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 65%)`;
+      document.body.appendChild(trail);
+      
+      setTimeout(() => {
+        trail.remove();
+      }, 600);
+    });
+    
+    // Fungsi untuk membuat emoji love - INI YANG DIPERBAIKI
+    function createEmoji() {
+      const emojis = ['❤', '💖', '💕', '💓', '💗', '💘', '💝', '💞'];
+      
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+          const emojiElement = document.createElement('div');
+          emojiElement.classList.add('emoji');
+          emojiElement.innerHTML = emoji;
+          emojiElement.style.left = Math.random() * window.innerWidth + 'px';
+          emojiElement.style.top = (window.innerHeight + 20) + 'px';
+          emojiElement.style.fontSize = (Math.random() * 25 + 20) + 'px';
+          
+          // Set custom property untuk animasi
+          const xEnd = (Math.random() * 200 - 100); // Nilai antara -100 dan 100
+          emojiElement.style.setProperty('--x-end', xEnd + 'px');
+          
+          emojiElement.style.color = `hsl(${Math.random() * 360}, 80%, 65%)`;
+          
+          document.body.appendChild(emojiElement);
+          
+          // Hapus emoji setelah animasi selesai
+          setTimeout(() => {
+            if (emojiElement.parentNode) {
+              emojiElement.parentNode.removeChild(emojiElement);
+            }
+          }, 4000);
+        }, i * 80);
+      }
+    }
+    
+    // Fungsi untuk membuat confetti
+    function createConfetti() {
+      for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 65%)`;
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.width = `${Math.random() * 10 + 5}px`;
+        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          if (confetti.parentNode) {
+            confetti.parentNode.removeChild(confetti);
+          }
+        }, 5000);
+      }
+    }
+    
+    // Tombol love - INI YANG DIPERBAIKI
+    loveButton.addEventListener('click', function() {
+      createEmoji();
+      
+      // Animasi tombol saat diklik
+      this.style.animation = 'none';
+      setTimeout(() => {
+        this.style.animation = 'loveButtonPulse 2s infinite';
+      }, 10);
+    });
+    
+    // Efek sparkle acak
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * window.innerWidth + 'px';
+      sparkle.style.top = Math.random() * window.innerHeight + 'px';
+      sparkle.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 65%)`;
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        if (sparkle.parentNode) {
+          sparkle.parentNode.removeChild(sparkle);
+        }
+      }, 1000);
+    }
+    
+    // Buat sparkle secara periodik
+    setInterval(createSparkle, 500);
+    
+    // Animasi latar belakang teks
+    setInterval(() => {
+      const colors = [
+        'rgba(255, 255, 255, 0.5)',
+        'rgba(255, 214, 231, 0.5)',
+        'rgba(255, 194, 221, 0.5)',
+        'rgba(255, 168, 206, 0.5)'
+      ];
+      const textBox = document.getElementById('textBox');
+      if (textBox) {
+        textBox.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      }
+    }, 5000);
+    
+    // Tunggu hingga semua konten dimuat sebelum memulai animasi
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(typeWriter, 1000);
+      
+      // Tambahkan efek saat halaman dimuat
+      createConfetti();
+    });
+  </script>
+</body>
+</html>
